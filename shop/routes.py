@@ -87,7 +87,7 @@ def cart_display():
             if item.id in cart:
                 cart[item.id]["quantity"] += 1
             else:
-                cart[item.id] = {"quantity":1, "title": item.title, "price":item.price}
+                cart[item.id] = {"quantity":1, "title": item.item_name, "price":item.price}
             total_quantity = sum(i['quantity'] for i in cart.values())
 
 
