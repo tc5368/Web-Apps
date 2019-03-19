@@ -55,9 +55,6 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-#Flask lab 3: implementation of Cart.  Needs 'session' import!
-# https://github.com/kkschick/ubermelon-shopping-app/blob/master/melons.py MELONS
-
 @app.route("/add_to_cart/<int:item_id>")
 def add_to_cart(item_id):
     if "cart" not in session:
@@ -67,7 +64,6 @@ def add_to_cart(item_id):
 
     flash("The item has been added to your shopping cart!")
     return redirect("/cart")
-
 
 @app.route("/cart", methods=['GET', 'POST'])
 def cart_display():
@@ -90,10 +86,40 @@ def cart_display():
                 cart[item.id] = {"quantity":1, "title": item.title, "price":item.price}
             total_quantity = sum(i['quantity'] for i in cart.values())
 
-
         return render_template("cart.html", title='Your Shopping Cart', display_cart = cart, total = total_price, total_quantity = total_quantity)
 
     return render_template('cart.html')
+
+@app.route("/add_to_wishlist/<int:item_id>")
+def add_to_wishlist(item_id):
+    if "wishlist" not in session:
+        session["wishlist"] = []
+    session["wishlist"].append(item_id)
+    flash("The item has been added to your wishlist")
+    return redirect("/wishlist")
+
+@app.route("/wishlist", methods=['GET', 'POST'])
+def wishlist_display():
+    if "wishlist" not in session:
+        flash('There is nothing in your wishlist.')
+        return render_template("wishlist.html", display_wishlist = {}, total = 0)
+    else:
+        products = session["wishlist"]
+        wishlist = {}
+
+        total_price = 0
+        total_quantity = 0
+        for product in products:
+            item = Item.query.get_or_404(product)
+
+            total_price += item.price
+            if item.id in wishlist:
+                wishlist[item.id]["quantity"] += 1
+            else:
+                wishlist[item.id] = {"quantity":1, "Product name": item.item_name, "price":item.price}
+            total_quantity = sum(product['quantity'] for product in wishlist.values())
+
+        return render_template("wishlist.html", title= "Your basket", display_wishlist = wishlist, total = total_price, total_quantity = total_quantity)
 
 @app.route("/delete_item/<int:item_id>", methods=['GET', 'POST'])
 def delete_item(item_id):
