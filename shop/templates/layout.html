@@ -18,7 +18,9 @@
     Hello, Guest! &nbsp| <a href="{{ url_for('login') }}">Login&nbsp;</a>
     or <a href="{{ url_for('register') }}">Register</a>&nbsp|
     {% endif %}
-    <a href="{{ url_for('cart_display') }}" class="header">Cart ({{total_quantity}} items) </a>&nbsp|
+    <a href="{{ url_for('cart_display') }}" class="header">Cart </a>
+    &nbsp|
+    <a href="{{ url_for('wishlist_display') }}" class="header">Wishlist </a>&nbsp|
 
   </div>
 
