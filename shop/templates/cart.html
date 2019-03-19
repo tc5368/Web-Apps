@@ -14,7 +14,7 @@
     <td>£{{ (value["quantity"] * value["price"]) }}</td>
 
     <td>
-      <form action="{{ url_for('delete_book', book_id=key|int) }}" method="POST">
+      <form action="{{ url_for('delete_item', item_id=key|int) }}" method="POST">
         <input class="" type="submit" value="Delete">
       </form>
     </td>
