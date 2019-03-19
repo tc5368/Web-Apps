@@ -133,3 +133,13 @@ def delete_item(item_id):
     session.modified = True
 
     return redirect("/cart")
+
+@app.route("/delete_item_wishlist/<int:item_id>", methods=['GET', 'POST'])
+def delete_item_wishlist(item_id):
+    if "wishlist" not in session:
+        session["wishlist"] = []
+    session["wishlist"].remove(item_id)
+
+    flash("The item has been removed from your wishlist")
+    session.modified = True
+    return redirect("/wishlist")
