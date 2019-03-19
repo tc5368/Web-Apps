@@ -1,7 +1,7 @@
 import os
 from flask import render_template, url_for, request, redirect, flash, session
 from shop import app, db
-from shop.models import Author, Book, User
+from shop.models import Maker, Item, User
 from shop.forms import RegistrationForm, LoginForm
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -9,18 +9,18 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/")
 @app.route("/home")
 def home():
-    books = Book.query.all()
-    return render_template('home.html', books=books, title='My Wonderful Book Shop')
+    items = Item.query.all()
+    return render_template('home.html', items=items, title='My Shop')
 
 @app.route("/about")
 def about():
     return render_template('about.html', title='About')
 
-@app.route("/book/<int:book_id>")
-def book(book_id):
-    book = Book.query.get_or_404(book_id)
+@app.route("/item/<int:item_id>")
+def item(item_id):
+    item = Item.query.get_or_404(item_id)
 
-    return render_template('book.html', book=book)
+    return render_template('item.html', item=item)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -58,14 +58,14 @@ def logout():
 #Flask lab 3: implementation of Cart.  Needs 'session' import!
 # https://github.com/kkschick/ubermelon-shopping-app/blob/master/melons.py MELONS
 
-@app.route("/add_to_cart/<int:book_id>")
-def add_to_cart(book_id):
+@app.route("/add_to_cart/<int:item_id>")
+def add_to_cart(item_id):
     if "cart" not in session:
         session["cart"] = []
 
-    session["cart"].append(book_id)
+    session["cart"].append(item_id)
 
-    flash("The book is added to your shopping cart!")
+    flash("The item has been added to your shopping cart!")
     return redirect("/cart")
 
 
@@ -75,34 +75,34 @@ def cart_display():
         flash('There is nothing in your cart.')
         return render_template("cart.html", display_cart = {}, total = 0)
     else:
-        items = session["cart"]
+        things = session["cart"]
         cart = {}
 
         total_price = 0
         total_quantity = 0
-        for item in items:
-            book = Book.query.get_or_404(item)
+        for i in things:
+            item = Item.query.get_or_404(i)
 
-            total_price += book.price
-            if book.id in cart:
-                cart[book.id]["quantity"] += 1
+            total_price += item.price
+            if item.id in cart:
+                cart[item.id]["quantity"] += 1
             else:
-                cart[book.id] = {"quantity":1, "title": book.title, "price":book.price}
-            total_quantity = sum(item['quantity'] for item in cart.values())
+                cart[item.id] = {"quantity":1, "title": item.title, "price":item.price}
+            total_quantity = sum(i['quantity'] for i in cart.values())
 
 
         return render_template("cart.html", title='Your Shopping Cart', display_cart = cart, total = total_price, total_quantity = total_quantity)
 
     return render_template('cart.html')
 
-@app.route("/delete_book/<int:book_id>", methods=['GET', 'POST'])
-def delete_book(book_id):
+@app.route("/delete_item/<int:item_id>", methods=['GET', 'POST'])
+def delete_item(item_id):
     if "cart" not in session:
         session["cart"] = []
 
-    session["cart"].remove(book_id)
+    session["cart"].remove(item_id)
 
-    flash("The book has been removed from your shopping cart!")
+    flash("The item has been removed from your shopping cart!")
 
     session.modified = True
 
