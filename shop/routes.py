@@ -5,13 +5,7 @@ from shop.models import Maker, Item, User
 from shop.forms import RegistrationForm, LoginForm, SearchForm
 from flask_login import login_user, current_user, logout_user, login_required
 
-
-@app.route("/", methods=['GET', 'POST'])
-@app.route("/home", methods=['GET', 'POST'])
-
-
-
-def home():
+def get_items():
     form = SearchForm()
     search = SearchForm(request.form)
     search_string = ""
@@ -23,23 +17,33 @@ def home():
         items = Item.query.all()
         return render_template('home.html', items=items, title='My Shop')
 
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/home", methods=['GET', 'POST'])
+
+def home():
+    items = get_items()
+    return render_template('home.html' items=items)
 
 
 @app.route("/name_alpha/", methods=['GET', 'POST'])
 def name_alpha():
-    return render_template('home.html', items = Item.query.order_by("item_name"))
+    items = Item.query.order_by("item_name")
+    return render_template('home.html', items = items)
 
 @app.route("/name_rev_alpha/", methods=['GET', 'POST'])
 def name_rev_alpha():
-    return render_template('home.html', items = Item.query.order_by("item_name")[::-1])
+    items = Item.query.order_by("item_name")[::-1]
+    return render_template('home.html', items = items)
 
 @app.route("/price_h2l/", methods=['GET', 'POST'])
 def price_h2l():
-    return render_template('home.html', items = Item.query.order_by("price")[::-1])
+    items = Item.query.order_by("price")[::-1]
+    return render_template('home.html', items =items)
 
 @app.route("/price_l2h/", methods=['GET', 'POST'])
 def price_l2h():
-    return render_template('home.html', items = Item.query.order_by('price'))
+    items = Item.query.order_by('price')
+    return render_template('home.html', items = items)
 
 
 @app.route("/about")
