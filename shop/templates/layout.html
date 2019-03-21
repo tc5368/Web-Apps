@@ -30,8 +30,18 @@
           Hello, {{ current_user.username }}!&nbsp|
           <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout </a>&nbsp|
         {% else %}
-          Hello, Guest! &nbsp| <a href="{{ url_for('login') }}">Login&nbsp;</a>
-          or <a href="{{ url_for('register') }}">Register</a>&nbsp|
+          <li class="nav-item">
+          Hello, Guest! &nbsp| 
+        </li>
+        <li class="nav-item">
+          <a href="{{ url_for('login') }}">Login&nbsp;</a>
+        </li>
+        <li class="nav-item">
+          or 
+        </li>
+        <li class="nav-item">
+          <a href="{{ url_for('register') }}">Register</a>&nbsp|
+        </li>
         {% endif %}
       </li>
     </ul>
