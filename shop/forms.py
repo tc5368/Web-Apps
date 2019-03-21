@@ -33,3 +33,15 @@ class LoginForm(FlaskForm):
 
 class SearchForm(FlaskForm):
     search = StringField('')
+
+class CheckoutForm(FlaskForm):
+    cardnumber = StringField('Card Number', validators = [DataRequired(), Regexp('^[0-9]{16}$', message='Your card number should be 16 characters long.')]) 
+    cardname = StringField('Name on Card', validators = [DataRequired()])
+    cardexp = IntegerField('Expiration month', validators = [DataRequired(), NumberRange(min=0,max=12, message ='Please enter a valid month between 01 and 12')])
+    cardyearexp = IntegerField('Expiration year', validators = [DataRequired(), NumberRange(min=19, message ='Please enter a valid year')])  
+    cardcvv = IntegerField('CVV', validators = [DataRequired(), Regexp('^[0-9]{3}$', message='Your CVV is the 3-digit number at the back of your card.')])
+    address = StringField('Address', validators = [DataRequired()])
+    city = StringField('City', validators = [DataRequired()])
+    postcode = StringField('Postcode', validators = [DataRequired()])
+    phonenumber = StringField('Phone Number', validators = [DataRequired(), Regexp('^[0-9]{11}$', message='Please input a valid phone number.')])
+    submit = SubmitField('Confirm Purchase')

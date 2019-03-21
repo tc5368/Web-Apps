@@ -199,3 +199,11 @@ def delete_item(item_id):
     session.modified = True
 
     return redirect("/cart")
+
+@app.route("/checkout", methods = ['GET', 'POST'])
+def checkout():
+    form = CheckoutForm()
+    if form.validate_on_submit():
+        session["cart"] = []
+        return redirect(url_for('home'))
+    return render_template('checkout.html', title = 'Checkout', form = form )
