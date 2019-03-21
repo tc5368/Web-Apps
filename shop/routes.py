@@ -22,11 +22,11 @@ def name_rev_alpha():
 
 @app.route("/price_h2l/", methods=['GET', 'POST'])
 def priceh2l():
-    return render_template('home.html', jewellery = Item.query.order_by("price"))
+    return render_template('home.html', items = Item.query.order_by("price"))
 
 @app.route("/price_l2h/", methods=['GET', 'POST'])
 def pricel2h():
-    return render_template('home.html', jewellery = Item.query.order_by('price')[::-1])
+    return render_template('home.html', items = Item.query.order_by('price')[::-1])
 
 
 @app.route("/about")
