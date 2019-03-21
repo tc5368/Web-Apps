@@ -18,12 +18,11 @@ def home():
     search_string = ""
     if request.method == 'POST':
         search_string = search.data['search' ]
-        items = Item.query.filter(Item.item_name.like("%" + search_string + "%")).order_by("item_name")
+        items = Item.query.filter(Item.item_name.like("%" + search_string + "%"))
         return render_template('home.html', items=items, form=form)
     else:
         items = Item.query.all()
         return render_template('home.html', items=items, title='My Shop')
-
 
 
 @app.route("/name_alpha/", methods=['GET', 'POST'])
@@ -36,7 +35,7 @@ def name_alpha():
         items = Item.query.filter(Item.item_name.like("%" + search_string + "%")).order_by("item_name")
         return render_template('home.html', items=items, form=form)
     else:
-        items = Item.query.all().order_by("item_name")
+        items = Item.query.order_by("item_name")
         return render_template('home.html', items=items, title='My Shop')
 
 @app.route("/name_rev_alpha/", methods=['GET', 'POST'])
@@ -49,7 +48,7 @@ def name_rev_alpha():
         items = Item.query.filter(Item.item_name.like("%" + search_string + "%")).order_by("item_name")[::-1]
         return render_template('home.html', items=items, form=form)
     else:
-        items = Item.query.all().order_by("item_name")[::-1]
+        items = Item.query.order_by("item_name")[::-1]
         return render_template('home.html', items=items, title='My Shop')
 
 @app.route("/price_h2l/", methods=['GET', 'POST'])
@@ -62,7 +61,7 @@ def price_h2l():
         items = Item.query.filter(Item.item_name.like("%" + search_string + "%")).order_by("price")[::-1]
         return render_template('home.html', items=items, form=form)
     else:
-        items = Item.query.all().order_by("price")[::-1]
+        items = Item.query.order_by("price")[::-1]
         return render_template('home.html', items=items, title='My Shop')
 
 @app.route("/price_l2h/", methods=['GET', 'POST'])
@@ -75,7 +74,7 @@ def price_l2h():
         items = Item.query.filter(Item.item_name.like("%" + search_string + "%")).order_by("price")
         return render_template('home.html', items=items, form=form)
     else:
-        items = Item.query.all().order_by('price')
+        items = Item.query.order_by('price')
         return render_template('home.html', items=items, title='My Shop')
 
 
