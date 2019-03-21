@@ -41,7 +41,7 @@ def name_alpha():
 
 @app.route("/name_rev_alpha/", methods=['GET', 'POST'])
 def name_rev_alpha():
-        form = SearchForm()
+    form = SearchForm()
     search = SearchForm(request.form)
     search_string = ""
     if request.method == 'POST':
