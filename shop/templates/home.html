@@ -3,12 +3,15 @@
 <h1>Fridge Shop: </h1>
   {% for item in items %}
 
-  <p><b>{{item.item_name}}</b></p>	
-  <a href="{{ url_for('item', item_id=item.id) }}"><img src = "{{ url_for('static', filename='img/' + item.image_file) }}"></a>
-    <a href="{{ url_for('item', item_id=item.id) }}"></a>
-
-    <p>Price: {{ item.price }}</p>
-    <p>Descriptions: {{item.description}}</p>		
+  <div class="card" style="width: 195.875px; height: 600px;float: left;">
+	  <img src="{{url_for('static', filename='img/' + item.image_file) }}" class="card-img-top" alt="...">
+	  <div class="card-body">
+	    <h5 class="card-title">{{item.item_name}}</h5>
+	    <a href="{{ url_for('item', item_id=item.id) }}" class="btn btn-primary">Go to Item page</a>
+	    <p>Price: {{ item.price }}</p>
+    	<p>Descriptions: {{item.description}}</p>
+	  </div>
+	</div>		
 
   {% endfor %}
 
