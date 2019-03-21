@@ -2,26 +2,29 @@
 {% block content %}
 <h1>Game Shop: </h1>
 
-<div class ='dropdown'>
-  <button class='dropdownbutton'>Sort By</button>
-    <div class=dropdown-content>
-      <a href="{{url_for('price_h2l')}}">Price High to Low</a>
-      <a href="{{url_for('price_l2h')}}">Price Low to High</a>
-      <a href="{{url_for('name_alpha')}}">Alphabetical</a>
-      <a href="{{url_for('name_rev_alpha')}}">Reverse Alphabetical</a>
-    </div>
-</div>
+<form method="POST" class="form-inline my-2 my-lg-0" style="float: right; padding-top: 10px;">
+	<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+	<button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+</form>
 
-<p></p><p></p>
+<div class ='dropdown'>
+	<button class='dropdownbutton'>Sort By</button>
+	<div class=dropdown-content>
+		<a href="{{url_for('price_h2l')}}">Price High to Low</a>
+		<a href="{{url_for('price_l2h')}}">Price Low to High</a>
+		<a href="{{url_for('name_alpha')}}">Alphabetical</a>
+		<a href="{{url_for('name_rev_alpha')}}">Reverse Alphabetical</a>
+	</div>
+</div>
 
   {% for item in items %}
   <div class="card" style="width: 195.875px; height: 600px;float: left; z-index: 0;">
 	  <img src="{{url_for('static', filename='img/' + item.image_file) }}" class="card-img-top" alt="...">
 	  <div class="card-body">
-	    <h5 class="card-title">{{item.item_name}}</h5>
-	    <a href="{{ url_for('item', item_id=item.id) }}" class="btn btn-primary">Go to Item page</a>
-	    <p>Price: {{ item.price }}</p>
-    	<p>Descriptions: {{item.description}}</p>
+		<h5 class="card-title">{{item.item_name}}</h5>
+		<a href="{{ url_for('item', item_id=item.id) }}" class="btn btn-primary">Go to Item page</a>
+		<p>Price: {{ item.price }}</p>
+		<p>Descriptions: {{item.description}}</p>
 	  </div>
 	</div>		
 
