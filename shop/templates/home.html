@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1>Game Shop: </h1>
+
 <div class ='dropdown'>
   <button class='dropdownbutton'>Sort By</button>
     <div class=dropdown-content>
@@ -10,6 +11,8 @@
       <a href="{{url_for('name_rev_alpha')}}">Reverse Alphabetical</a>
     </div>
 </div>
+
+<p></p><p></p><p></p>
 
   {% for item in items %}
   <div class="card" style="width: 195.875px; height: 600px;float: left; z-index: 0;">
