@@ -20,12 +20,9 @@ def home():
         books = Book.query.filter(item_name.like("%" + search_string + "%"))
         return render_template('home.html', items=items, form=form)
     else:
-        books = Book.query.all()
-        return render_template('home.html', items=items, form=form)
+        books = Item.query.all()
+        return render_template('home.html', items=items, title='My Shop')
 
-
-    items = Item.query.all()
-    return render_template('home.html', items=items, title='My Shop')
 
 
 
