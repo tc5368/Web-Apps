@@ -10,7 +10,7 @@
     {% endfor %}
   </div>
   <div class="">
-    <{{ form.city.label }} {{ form.city}}
+    {{ form.city.label }} {{ form.city}}
     {% for error in form.city.errors %}
     <span style="color: green;">[{{ error }}]</span>
     {% endfor %}

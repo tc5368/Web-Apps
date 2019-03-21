@@ -45,3 +45,6 @@ class CheckoutForm(FlaskForm):
     postcode = StringField('Postcode', validators = [DataRequired()])
     phonenumber = StringField('Phone Number', validators = [DataRequired(), Regexp('^[0-9]{11}$', message='Please input a valid phone number.')])
     submit = SubmitField('Confirm Purchase')
+
+
+    
