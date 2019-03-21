@@ -2,17 +2,6 @@
 {% block content %}
 <h1>Game Shop: </h1>
 
-<div class ='dropdown'>
-    <button class='dropdownbutton'>Sort By</button>
-    <div class=dropdown-content>
-    	<a href="{{url_for('price_h2l')}}">Price High to Low</a>
-    	<a href="{{url_for('price_l2h')}}">Price Low to High</a>
-    	<a href="{{url_for('name_alpha')}}">Alphabetical</a>
-    	<a href="{{url_for('name_rev_alpha')}}">Reverse Alphabetical</a>
-    </div>
-</div>
-
-
   {% for item in items %}
   <div class="card" style="width: 195.875px; height: 600px;float: left;">
 	  <img src="{{url_for('static', filename='img/' + item.image_file) }}" class="card-img-top" alt="...">
