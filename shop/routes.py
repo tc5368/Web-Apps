@@ -2,7 +2,7 @@ import os
 from flask import render_template, url_for, request, redirect, flash, session
 from shop import app, db
 from shop.models import Maker, Item, User
-from shop.forms import RegistrationForm, LoginForm
+from shop.forms import RegistrationForm, LoginForm, SearchForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 
