@@ -12,19 +12,19 @@ def home():
     items = Item.query.all()
     return render_template('home.html', items=items, title='My Shop')
 
-@app.route("/name-alpha/", methods=['GET', 'POST'])
-def name-alpha():
+@app.route("/name_alpha/", methods=['GET', 'POST'])
+def name_alpha():
     return render_template('home.html', items = Item.query.order_by("item_name"))
 
-@app.route("/name-rev-alpha/", methods=['GET', 'POST'])
-def name-rev-alpha():
+@app.route("/name_rev_alpha/", methods=['GET', 'POST'])
+def name_rev_alpha():
     return render_template('home.html', items = Item.query.order_by("item_name"))[::-1]
 
-@app.route("/priceh2l/", methods=['GET', 'POST'])
+@app.route("/price_h2l/", methods=['GET', 'POST'])
 def priceh2l():
     return render_template('home.html', jewellery = Item.query.order_by("price"))
 
-@app.route("/pricel2h/", methods=['GET', 'POST'])
+@app.route("/price_l2h/", methods=['GET', 'POST'])
 def pricel2h():
     return render_template('home.html', jewellery = Item.query.order_by('price')[::-1])
 
