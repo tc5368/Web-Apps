@@ -8,9 +8,33 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/")
 @app.route("/home")
+
+
+
 def home():
+    form = SearchForm()
+    search = SearchForm(request.form)
+    search_string = ""
+    if request.method == 'POST':
+        search_string = search.data['search' ]
+        books = Book.query.filter(item_name.like("%" + search_string + "%"))
+        return render_template('home.html', items=items, form=form)
+    else:
+        books = Book.query.all()
+        return render_template('home.html', items=items, form=form)
+
+
     items = Item.query.all()
     return render_template('home.html', items=items, title='My Shop')
+
+
+
+
+
+
+
+
+
 
 @app.route("/name_alpha/", methods=['GET', 'POST'])
 def name_alpha():
