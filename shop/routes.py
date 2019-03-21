@@ -17,7 +17,7 @@ def home():
     search_string = ""
     if request.method == 'POST':
         search_string = search.data['search' ]
-        books = Book.query.filter(item_name.like("%" + search_string + "%"))
+        items = Item.query.filter(item_name.like("%" + search_string + "%"))
         return render_template('home.html', items=items, form=form)
     else:
         books = Item.query.all()
