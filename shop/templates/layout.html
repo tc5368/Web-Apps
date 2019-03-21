@@ -21,18 +21,18 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{{ url_for('home') }}">Home &nbsp| <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li>
-        <a class="nav-link" href="{{ url_for('about') }}">About Us &nbsp| <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{ url_for('about') }}">About Us<span class="sr-only">(current)</span></a>
       </li>
       <li>
         {% if current_user.is_authenticated %}
-          Hello, {{ current_user.username }}!&nbsp|
-          <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout </a>&nbsp|
+          Hello, {{ current_user.username }}!
+          <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout </a>
         {% else %}
-          Hello, Guest! &nbsp| <a href="{{ url_for('login') }}">Login&nbsp;</a>
-            or <a href="{{ url_for('register') }}">Register</a>&nbsp|
+          Hello, Guest! <a href="{{ url_for('login') }}">Login&nbsp;</a>
+            or <a href="{{ url_for('register') }}">Register</a>
         {% endif %}
       </li>
       <li class="nav-item dropdown">
