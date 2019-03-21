@@ -20,16 +20,8 @@ def home():
         items = Item.query.filter(item_name.like("%" + search_string + "%"))
         return render_template('home.html', items=items, form=form)
     else:
-        books = Item.query.all()
+        items = Item.query.all()
         return render_template('home.html', items=items, title='My Shop')
-
-
-
-
-
-
-
-
 
 
 
