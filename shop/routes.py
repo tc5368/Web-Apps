@@ -22,7 +22,7 @@ def get_items():
 
 def home():
     items = get_items()
-    return render_template('home.html' items=items)
+    return render_template('home.html', items=items)
 
 
 @app.route("/name_alpha/", methods=['GET', 'POST'])
