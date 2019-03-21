@@ -6,8 +6,8 @@ from shop.forms import RegistrationForm, LoginForm, SearchForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 
-@app.route("/")
-@app.route("/home")
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/home", methods=['GET', 'POST'])
 
 
 
