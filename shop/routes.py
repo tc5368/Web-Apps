@@ -18,7 +18,7 @@ def name_alpha():
 
 @app.route("/name_rev_alpha/", methods=['GET', 'POST'])
 def name_rev_alpha():
-    return render_template('home.html', items = Item.query.order_by("item_name"))[::-1]
+    return render_template('home.html', items = Item.query.order_by("item_name")[::-1])
 
 @app.route("/price_h2l/", methods=['GET', 'POST'])
 def price_h2l():
