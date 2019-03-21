@@ -12,6 +12,23 @@ def home():
     items = Item.query.all()
     return render_template('home.html', items=items, title='My Shop')
 
+@app.route("/name-alpha/", methods=['GET', 'POST'])
+def name-alpha():
+    return render_template('home.html', items = Item.query.order_by("item_name"))
+
+@app.route("/name-rev-alpha/", methods=['GET', 'POST'])
+def name-rev-alpha():
+    return render_template('home.html', items = Item.query.order_by("item_name"))[::-1]
+
+@app.route("/priceh2l/", methods=['GET', 'POST'])
+def priceh2l():
+    return render_template('home.html', jewellery = Item.query.order_by("price"))
+
+@app.route("/pricel2h/", methods=['GET', 'POST'])
+def pricel2h():
+    return render_template('home.html', jewellery = Item.query.order_by('price')[::-1])
+
+
 @app.route("/about")
 def about():
     return render_template('about.html', title='About')
@@ -133,13 +150,3 @@ def delete_item(item_id):
     session.modified = True
 
     return redirect("/cart")
-
-@app.route("/delete_item_wishlist/<int:item_id>", methods=['GET', 'POST'])
-def delete_item_wishlist(item_id):
-    if "wishlist" not in session:
-        session["wishlist"] = []
-    session["wishlist"].remove(item_id)
-
-    flash("The item has been removed from your wishlist")
-    session.modified = True
-    return redirect("/wishlist")
